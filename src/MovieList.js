@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState} from 'react';
 
 
 const MovieList =  () =>{
@@ -19,10 +19,18 @@ const MovieList =  () =>{
             id: 213873
         }
 
-    ])
-    return(
+    ]);
 
+    return(
+        <div>
+        {movies.map(movie =>(
+            <ul>
+                <li>{movie.name}</li>
+            </ul>
+        ))}
+         </div>
     );
+   
 }
 
 export default MovieList
