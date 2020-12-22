@@ -1,22 +1,35 @@
-import React from 'react';
+import React, { useState, useContext } from "react";
+import { MovieContext } from "./MovieContext";
 
-const AddMovie = () =>{
-    const getName =(e)=>{
-        const name = e.target.value;
-        console.log(name)
-    }
+const AddMovie = () => {
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [movies, setMovies] = useContext(MovieContext);
 
-return(
-    <form>
-        <label>Movie's Name</label>
-        <input onChange={getName} type='text' name='name' value=""/>
-        <label>Price</label>
-        <input type='text' name='price' value=""/>
+  const getName = (e) => {
+    const name = e.target.value;
+    console.log(name);
+    setName(name);
+  };
 
-        <button type='submit'>Add</button>
+  const getPrice = (e) => {
+    setPrice(e.target.value);
+  };
+
+  const submitMovie = (e) => {
+    e.preventDefault();
+    setMovies(prevMovies =>[...prevMovies,{name:name, price:price}])
+  };
+
+  return (
+    <form onSubmit={submitMovie}>
+      <label>Movie's Name</label>
+      <input onChange={getName} type="text" name="name" value={name} />
+      <label>Price</label>
+      <input onChange={getPrice} type="text" name="price" value={price} />
+      <button type="submit">Add</button>
     </form>
-)
-
-}
+  );
+};
 
 export default AddMovie;
